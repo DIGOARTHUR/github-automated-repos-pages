@@ -1,17 +1,17 @@
 
 
 import { ToastContainer } from 'react-toastify';
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { FiExternalLink } from 'react-icons/fi';
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { Card } from "../components/Card";
-import { IconsData } from 'github-automated-repos/index';
+import { IconsData } from 'github-automated-repos';
 import Loader from '../components/Loader';
 
 
-export default function IconStacks() {
+export default function StackIcons() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -22,7 +22,7 @@ export default function IconStacks() {
         return () => clearTimeout(id);
 
     }, []);
-    const { iconStacks } = IconsData();
+    const { stackIcons } = IconsData();
 
     const [finishedTimeout, setFinishedTimeout] = useState(false);
 
@@ -34,11 +34,11 @@ export default function IconStacks() {
     useEffect(() => {
 
 
-        setStackIconKeys(Object.keys(iconStacks));
-        setStackIconValues(Object.values(iconStacks));
+        setStackIconKeys(Object.keys(stackIcons));
+        setStackIconValues(Object.values(stackIcons));
 
-        setInicialStackIconKeys(Object.keys(iconStacks));
-        setInicialStackIconValues(Object.values(iconStacks));
+        setInicialStackIconKeys(Object.keys(stackIcons));
+        setInicialStackIconValues(Object.values(stackIcons));
     }, []);
 
     function _handleSearch(e) {
@@ -55,7 +55,7 @@ export default function IconStacks() {
         console.log(filterStackIconKeys);
 
         const filterStackIconValues = filterStackIconKeys.map((iconKey) => {
-            return iconStacks[iconKey];
+            return stackIcons[iconKey];
         });
 
         setStackIconValues(filterStackIconValues);
@@ -68,9 +68,9 @@ export default function IconStacks() {
 
                 <article className=" h-screen pt-8  mt-16 ml-[340px] px-6 pr-56 max-lg:ml-0 max-lg:pr-6  ">
 
-                    <span>ProjectIcons &#62;</span>
+                    <span>Stack Icons &#62;</span>
 
-                    <h1 className="text-4xl mt-8  mb-2 max-md:text-4xl">Project Icons</h1>
+                    <h1 className="text-4xl mt-8  mb-2 max-md:text-4xl">Stack Icons</h1>
                     <hr />
                     <div className='mt-8'>
                         <input className=' bg-[#70708e33] w-full rounded-lg px-4 py-2 ' placeholder='🔍 Search Icons' type='text' onChange={_handleSearch} />
@@ -88,7 +88,7 @@ export default function IconStacks() {
                                 ) : (
                                     <div className='flex flex-col m-auto gap-4'>
                                         <p className='text-xl text-center'>
-                                            Didn't find your icon? <br /> Tell us about here:{' '}
+                                            Didn&apos;t find your icon? <br /> Tell us about here:{' '}
                                             <a className='flex gap-2 text-[#00979C] justify-center' href='https://github.com/DIGOARTHUR/github-automated-repos/issues/new?assignees=&labels=&template=2-feature-request.yaml'>
                                                 Feature Request <FiExternalLink />
                                             </a>
