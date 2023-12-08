@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "github-automated-repos": "^1.0.25",
+    "github-automated-repos": "^1.1.1",
     "rc-highlight": "^2.5.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

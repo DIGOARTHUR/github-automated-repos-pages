@@ -1,25 +1,27 @@
 import Footer from "../components/Footer";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import { Highlighter } from 'rc-highlight';
+import { Highlighter } from "rc-highlight";
 
-import fill_description from "../assets/imgs/fill_description.png"
-import fill_repositoryName from "../assets/imgs/fill_repositoryName.png"
-import fill_topics from "../assets/imgs/fill_topics.png"
-import fill_homepage from "../assets/imgs/fill_homepage.png"
-import typescript_logo from "../assets/imgs/typescript_logo.svg"
-import javascript_logo from "../assets/imgs/javascript_logo.svg"
+import fill_description from "../assets/imgs/fill_description.png";
+import fill_repositoryName from "../assets/imgs/fill_repositoryName.png";
+import fill_topics from "../assets/imgs/fill_topics.png";
+import fill_homepage from "../assets/imgs/fill_homepage.png";
+import typescript_logo from "../assets/imgs/typescript_logo.svg";
+import javascript_logo from "../assets/imgs/javascript_logo.svg";
+import { StackLabels } from "github-automated-repos";
+
 const highlighterStyle = {
-  paddingLeft: '5px',
+  paddingLeft: "5px",
 
-  backgroundColor: 'rgb(40, 44, 52)',
+  backgroundColor: "rgb(40, 44, 52)",
 };
 const highlighterStyleImport = {
-  paddingLeft: '5px',
+  paddingLeft: "5px",
 
-  fontSize: '17px',
-  backgroundColor: 'rgb(40, 44, 52)',
+  fontSize: "17px",
+  backgroundColor: "rgb(40, 44, 52)",
 };
 const packageInstall_Yarn = `
     yarn add github-automated-repos
@@ -30,18 +32,38 @@ const packageInstall_NPM = `
 `;
 
 const importPackage = `
-    import { useGithubAutomatedRepos, ProjectIcon, StackIcon } from 'github-automated-repos/index';
+    import { useGithubAutomatedRepos, ProjectIcon, StackIcon } from 'github-automated-repos';
 `;
 
+const hookConfig = `
+    import {useGitHubAutomatedRepos} from "github-automated-repos";
+
+    const data = useGitHubAutomatedRepos("GitHubUsername", "KeyWord");
+
+`;
+
+const hookUseGithubAutomatedRepos = `
+    const data = useGitHubAutomatedRepos("GitHubUsername", "KeyWord");
+`;
+
+const componentStackIcons = `
+    <StackIcons key={ } itemTopics={ } className={ } />
+`;
+
+const componentStackLabels = `
+    <StackLabes key={ } itemTopics={ } className={ } />
+`;
+
+const componentProjectIcons = `
+    <ProjectIcons key={ } itemTopics={ } className={ } />
+`;
 
 export default function GettingStart() {
-  const [changeCodeExample, setChangeCodeExample] = useState('javascript');
-  const [changeInstallPackage, setChangeInstallPackage] = useState('npm');
+  const [changeCodeExample, setChangeCodeExample] = useState("javascript");
+  const [changeInstallPackage, setChangeInstallPackage] = useState("npm");
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
-
   }, []);
 
   return (
@@ -51,154 +73,242 @@ export default function GettingStart() {
         <Sidebar />
 
         <article className=" h-full  pt-8  mt-16 ml-[340px] px-6 pr-56  max-lg:ml-0 max-lg:pr-6">
+          <span>GettingStart &#62;</span>
 
-
-          <span >GettingStart &#62;</span>
-
-          <h1 className="text-4xl mt-8  mb-2 max-md:text-4xl">Quick Start</h1>
+          <h1 className="text-4xl mt-8  mb-2 max-md:text-4xl">Getting Start</h1>
 
           <hr />
-          <p className="text-xl mt-8">This library automates the view your GitHub projects on your website in one place. But how? Make the code configuration only once in your application with github-automated-repos, and manage the view of your projects on GitHub in the Topics field. </p>
+          <p className="text-xl mt-8">
+            This library automates the view your GitHub projects on your website
+            in one place. But how? Make the code configuration only once in your
+            application with github-automated-repos, and manage the view of your
+            projects on GitHub in the Topics field.{" "}
+          </p>
           <div className="bg-[#4e5668fd] p-10 my-8 rounded-3xl">
             <h3 className="text-2xl mb-2">Why use?</h3>
             <p>
               <ul className="list-disc">
-                <li>Control the visualization of your projects in one place.</li>
+                <li>
+                  Control the visualization of your projects on the website, in
+                  your own GitHub in one place.
+                </li>
                 <li>You won't need to access code to add your projects.</li>
                 <li>More: customize your cards with icons.</li>
               </ul>
-
             </p>
           </div>
-          <div  >
+          <div>
             <div id="installPackage" className="h-16" />
 
             <h2 className="text-3xl mb-8">Install Package</h2>
 
-            <div className=' flex mb-4 gap-3'>
+            <div className=" flex mb-4 gap-3">
               <button
-                onClick={() => setChangeInstallPackage('npm')}
-                className={`flex p-3 w-[150px] rounded-lg justify-between border-2 border-[#e9191958] ${changeInstallPackage === 'npm' ? 'bg-[#e9191958]' : 'button'}`}
+                onClick={() => setChangeInstallPackage("npm")}
+                className={`flex p-3 w-[150px] rounded-lg justify-between border-2 border-[#e9191958] ${
+                  changeInstallPackage === "npm" ? "bg-[#e9191958]" : "button"
+                }`}
               >
-                NPM{' '}
-                <img src='https://user-images.githubusercontent.com/59892368/215260509-7ae59bdb-00c5-4ca2-968d-2dc46ebc22ba.svg'></img>
+                NPM{" "}
+                <img src="https://user-images.githubusercontent.com/59892368/215260509-7ae59bdb-00c5-4ca2-968d-2dc46ebc22ba.svg"></img>
               </button>
               <button
-                onClick={() => setChangeInstallPackage('yarn')}
-                className={`flex p-3 w-[150px] rounded-lg justify-between border-2 border-[#3179c64B] ${changeInstallPackage === 'yarn' ? 'bg-[#3179c64B]' : 'button'}`}
+                onClick={() => setChangeInstallPackage("yarn")}
+                className={`flex p-3 w-[150px] rounded-lg justify-between border-2 border-[#3179c64B] ${
+                  changeInstallPackage === "yarn" ? "bg-[#3179c64B]" : "button"
+                }`}
               >
-                Yarn{' '}
-                <img src='https://user-images.githubusercontent.com/59892368/232318472-fca31255-3553-4d5b-b897-ee29db29e619.svg'></img>
+                Yarn{" "}
+                <img src="https://user-images.githubusercontent.com/59892368/232318472-fca31255-3553-4d5b-b897-ee29db29e619.svg"></img>
               </button>
             </div>
-            {changeInstallPackage === 'npm' ? (
-              <Highlighter style={highlighterStyle}>{packageInstall_NPM}</Highlighter>
+            {changeInstallPackage === "npm" ? (
+              <Highlighter style={highlighterStyle}>
+                {packageInstall_NPM}
+              </Highlighter>
             ) : (
-              <Highlighter style={highlighterStyle}>{packageInstall_Yarn}</Highlighter>
+              <Highlighter style={highlighterStyle}>
+                {packageInstall_Yarn}
+              </Highlighter>
             )}
-
+            <br />
+            <h4 className="text-xl mb-8">hook config</h4>
+            <Highlighter style={highlighterStyle}>{hookConfig}</Highlighter>
           </div>
-          <div  >
+          <div>
             <div id="importPackage" className="h-16" />
 
             <h2 className="text-3xl mb-8">Import Package</h2>
-            <Highlighter style={highlighterStyleImport}>{importPackage}</Highlighter>
-            <div  >
-
-              <h2 className="text-2xl mb-8">The package imports four elements:</h2>
+            <Highlighter style={highlighterStyleImport}>
+              {importPackage}
+            </Highlighter>
+            <div>
+              <h2 className="text-2xl mb-8 mt-5">
+                The package imports four elements:
+              </h2>
               <div className="ml-8">
-                <span className="text-[#00979C] text-xl">&lt;ProjectIcon/&gt;</span>  component that renders the icons of the projects that come from data returned from the dataGithubRepos function as the Topics property. Check the Project Icons tab!
+                <span className="text-[#00979C] text-xl">
+                  {" "}
+                  useGithubAutomatedRepos ( )
+                </span>{" "}
+                hook responsible for automating the repositories. It returns a
+                function called dataGithubRepos, which takes two parameters:
+                data (data that comes from the GitHub API) and the keyword (the
+                latter responsible for showing the project on your website from
+                the moment it is declared in the Topics field of the your Github
+                repository). The dataGithubRepos returns, so optimized, an array
+                of objects containing 6 properties: id, html_url, homepage,
+                topics, name and description.
+                <div className="mt-5">
+                  <Highlighter style={highlighterStyle}>
+                    {hookUseGithubAutomatedRepos}
+                  </Highlighter>
+                </div>
                 <br />
                 <br />
-                <span className="text-[#00979C] text-xl"> &lt;StackIcon/&gt;</span> component that renders the icons of the stacks that come from data returned from the dataGithubRepos function as the Topics property. Check the Stack Icons tab!
+                <span className="text-[#00979C] text-xl">
+                  {" "}
+                  &lt;StackIcons/&gt;
+                </span>{" "}
+                component returns, based on the iteration of the topics array,
+                icons of the stacks used in your project. Insert the stacks used
+                in the topics field of your repository. Check the Stack Icons
+                tab!
+                <div className="mt-5">
+                  <Highlighter style={highlighterStyle}>
+                    {componentStackIcons}
+                  </Highlighter>
+                </div>
                 <br />
                 <br />
-                <span className="text-[#00979C] text-xl"> IGithubRepos</span> interface for the application in Typescript. Used to type the useState that will receive the array.
+                <span className="text-[#00979C] text-xl">
+                  {" "}
+                  &lt;StackLabels/&gt;
+                </span>{" "}
+                component returns, based on the iteration of the topics array,
+                labels of the stacks used in your project. Insert the stacks
+                used in the topics field of your repository. Check the Stack
+                Icons tab!
+                <div className="mt-5">
+                  <Highlighter style={highlighterStyle}>
+                    {componentStackLabels}
+                  </Highlighter>
+                </div>
                 <br />
                 <br />
-                <span className="text-[#00979C] text-xl"> useGithubAutomatedRepos ( )</span> hook responsible for automating the repositories. It returns a function called dataGithubRepos, which takes two parameters: data (data that comes from the GitHub API) and the keyword (the latter responsible for showing the project on your website from the moment it is declared in the Topics field of the your Github repository). The dataGithubRepos returns, so optimized, an array of objects containing 6 properties: id, html_url, homepage, topics, name and description.
-
-                <Highlighter style={highlighterStyleImport}>{dataReposGithubCode}</Highlighter>
-
+                <span className="text-[#00979C] text-xl">
+                  &lt;ProjectIcons/&gt;
+                </span>{" "}
+                component returns, based on the iteration of the topics array,
+                icons to represent your project. The project tag must be
+                inserted in the topics field of your repository. Check the
+                Project Icons tab!
+                <div className="mt-5">
+                  <Highlighter style={highlighterStyle}>
+                    {componentProjectIcons}
+                  </Highlighter>
+                </div>
               </div>
-
             </div>
-
           </div>
-          <div >
+          <div>
             <div id="fillInTheFields" className="h-16" />
             <h2 className="text-3xl  mb-8">Fill in the fields</h2>
             <div className="ml-8">
-
-              <span className="text-[#00979C] text-xl"> id:</span> repository identification number. used as parameter in the key tag. This field does not need to be filled in.
+              <span className="text-[#00979C] text-xl"> id:</span> repository
+              identification number. used as parameter in the key tag. This
+              field does not need to be filled in.
               <br />
               <br />
-              <span className="text-[#00979C] text-xl"> html_url</span>  repository link. Used as the link of access. This field does not need to be filled in.
+              <span className="text-[#00979C] text-xl"> html_url</span>{" "}
+              repository link. Used as the link of access. This field does not
+              need to be filled in.
               <br />
               <br />
-              <span className="text-[#00979C] text-xl"> homepage:</span>  it's the access link to the built page, page deploy.  About / Website of your GitHub.
+              <span className="text-[#00979C] text-xl"> homepage:</span> it's
+              the access link to the built page, page deploy. About / Website of
+              your GitHub.
               <br />
               <br />
               <img className="" src={fill_homepage} />
               <br />
               <br />
-              <span className="text-[#00979C] text-xl"> topics:</span> array that brings information about the icons in Project and Stack. Used in both ProjectIcon and StackIcon components. It is in this field that is passed the key configured in the hook. Refers to the field About / Topics of your GitHub.
+              <span className="text-[#00979C] text-xl"> topics:</span> array
+              that brings information about the icons in Project and Stack. Used
+              in both ProjectIcon and StackIcon components. It is in this field
+              that is passed the key configured in the hook. Refers to the field
+              About / Topics of your GitHub.
               <br />
               <br />
-              <img className="" src={fill_topics} alt='fill_topics' />
+              <img className="" src={fill_topics} alt="fill_topics" />
               <br />
               <br />
-              <span className="text-[#00979C] text-xl"> name: </span> This is the name of the repository. Refers to the field  Settings / General / Repository name of your GitHub.
+              <span className="text-[#00979C] text-xl"> name: </span> This is
+              the name of the repository. Refers to the field Settings / General
+              / Repository name of your GitHub.
               <br />
               <br />
-              <img className="" src={fill_repositoryName} alt='fill_repositoryName' />
+              <img
+                className=""
+                src={fill_repositoryName}
+                alt="fill_repositoryName"
+              />
               <br />
               <br />
-              <span className="text-[#00979C] text-xl"> description:</span>  This is the description given to your repository. Refers to the About /Description field of your GitHub.
+              <span className="text-[#00979C] text-xl"> description:</span> This
+              is the description given to your repository. Refers to the About
+              /Description field of your GitHub.
               <br />
               <br />
-              <img className="" src={fill_description} alt='fill_description' />
+              <img className="" src={fill_description} alt="fill_description" />
             </div>
-
-
           </div>
 
-          <div  >
+          <div>
             <div id="codeExample" className="h-12" />
             <h2 className="text-3xl mt-8 mb-8">Code Example</h2>
-            <p className="mb-2" style={{ color: 'red', backgroundColor: '#c90e0e2f' }}>
-              Don't forget to fill the keyword fields (determined by you) and the your github username.
+            <p
+              className="mb-2"
+              style={{ color: "red", backgroundColor: "#c90e0e2f" }}
+            >
+              Don't forget to fill the keyword fields (determined by you) and
+              the your github username.
             </p>
-            <Highlighter>{githubUsername}</Highlighter>
+            <Highlighter>{hookUseGithubAutomatedRepos}</Highlighter>
             <br />
-            <Highlighter>{keywordCode}</Highlighter>
-            <br />
+          
             <div className="flex gap-4 items-center mb-8">
-              <button onClick={() => setChangeCodeExample('javascript')} className="bg-[#f3da35a8] w-36 h-12 border-solid border-2 border-white rounded-lg flex justify-center items-center gap-2">Javascript  <img className="" src={javascript_logo} alt='logoLib' /></button>
-              <button onClick={() => setChangeCodeExample('typescript')} className="bg-[#3179c64b] w-36 h-12 border-solid border-2 border-white rounded-lg flex justify-center items-center gap-2">Typescript <img className="" src={typescript_logo} alt='logoLib' /></button>
-              <h3 className="text-2xl">App.{changeCodeExample === 'javascript' ? 'jsx' : 'tsx'}</h3>
+              <div
+               
+                className="bg-[#f3da35a8] w-36 h-12 border-solid border-2 border-white rounded-lg flex justify-center items-center gap-2"
+              >
+                Javascript{" "}
+                <img className="" src={javascript_logo} alt="logoLib" />
+              </div>
+              <div
+                onClick={() => setChangeCodeExample("typescript")}
+                className="bg-[#3179c64b] w-36 h-12 border-solid border-2 border-white rounded-lg flex justify-center items-center gap-2"
+              >
+                Typescript{" "}
+                <img className="" src={typescript_logo} alt="logoLib" />
+              </div>
+              <h3 className="text-2xl">
+                App.jsx  .tsx
+              </h3>
             </div>
 
-            {changeCodeExample === 'javascript' ? (
+            {changeCodeExample === "javascript" ? (
               <Highlighter>{codeExampleJSX}</Highlighter>
             ) : (
               <Highlighter>{codeExampleTSX}</Highlighter>
             )}
           </div>
           <Footer />
-
         </article>
-
       </main>
-
-
-
-
-
     </div>
-  )
+  );
 }
-
 
 const keywordCode = `  ...
                     {/*fill in the field below in the code example.*/}  
@@ -218,31 +328,22 @@ const dataReposGithubCode = `
 
 const codeExampleJSX = `   
   import './App.css';
-  import { useEffect, useState } from 'react';
-  import { useGithubAutomatedRepos, ProjectIcon, StackIcon } from 'github-automated-repos/index';
+  import { useGitHubAutomatedRepos, ProjectIcons, StackIcons, StackLabels, } from 'github-automated-repos';
   function App() {
-                              {/*useGithubAutomatedRepos hook*/ }
-    const { dataReposGithub } = useGithubAutomatedRepos()
-    const [repository, setRepository] = useState([])
-
-    useEffect(() => {
-                                  {/*Put here your github Name*/ }
-      fetch('https://api.github.com/users/usernameGitHub/repos?sort=created&per_page=999')
-      .then(response => response.json())
-      .then(data => setRepository(dataReposGithub(data, 'insertKeyWordHere'))); {/*<-- keyWord*/}
-  }, [])
-
+                    {/*useGitHubAutomatedRepos hook*/ }
+    const data = useGitHubAutomatedRepos("GitHubUsername", "KeyWord");
+    
     return (
       <div className="App">
         {
-          repository.map((item) => {
+          data.map((item) => {
             return (
               <div key={item.id}>
 
                 {/*Project Icon*/}
                 {item.topics.map((icon) => {
                   return (
-                    <ProjectIcon key={icon} className="project_Icon" iconItem={icon} />
+                    <ProjectIcons key={icon} className="project_Icon" iconItem={icon} />
                   )
                 })}
                 {/*html Url*/}
@@ -259,11 +360,14 @@ const codeExampleJSX = `
                 <a href={item.homepage}>
                     <h3>Homepage</h3>
                 </a>
-                {/*Stacks Icon*/}
+                {/*Stacks Icon and Stacks Label*/}
                 {item.topics.map((icon) => {
                   return (
-                    <StackIcon key={icon} className="stack_Icon" iconItem={icon} />
-                  )
+                    <div key={icon} style={{display:'flex', justifyContent:'center'}}>
+                      <StackIcons key={icon} className="stack_Icon" iconItem={icon} />
+                      <StackLabels key={icon} itemTopics={icon} />
+                    </div>
+                    )
                 })}
 
               </div>
@@ -283,7 +387,7 @@ const codeExampleJSX = `
 const codeExampleTSX = `   
   import './App.css';
   import { useEffect, useState } from 'react';
-  import { useGithubAutomatedRepos, ProjectIcon, StackIcon, IGithubRepos } from 'github-automated-repos/index';
+  import { useGithubAutomatedRepos, ProjectIcon, StackIcon, IGithubRepos } from 'github-automated-repos';
   function App() {
                               {/*useGithubAutomatedRepos hook*/ }
     const { dataReposGithub } = useGithubAutomatedRepos()
