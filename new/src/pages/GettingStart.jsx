@@ -364,7 +364,7 @@ const codeExampleJSX = `
                 {item.topics.map((icon) => {
                   return (
                     <div key={icon} style={{display:'flex', justifyContent:'center'}}>
-                      <StackIcons key={icon} className="stack_Icon" iconItem={icon} />
+                      <StackIcons key={icon} className="stack_Icon" itemTopics={icon} />
                       <StackLabels key={icon} itemTopics={icon} />
                     </div>
                     )
