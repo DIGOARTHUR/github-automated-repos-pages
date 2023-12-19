@@ -1,64 +1,45 @@
-import React, { useState } from "react";
-import "./style.scss";
-import { FiExternalLink } from "react-icons/fi";
-import { GoThreeBars } from "react-icons/go";
-import { GrClose } from "react-icons/gr";
-import { Link, useLocation } from "react-router-dom";
-export function Header() {
-  const path = useLocation().pathname;
+import { useState } from "react";
+import logoLib from "../../assets/imgs/logoLib.svg";
+import { IoLogoGithub } from "react-icons/io5";
+import { FaNpm } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
+import Sidebar from "../Sidebar";
+
+
+export default function Header() {
+  const viewportWidth = window.innerWidth;
   const [isOpenNavbar, setIsOpenNavbar] = useState(false);
-  console.log(isOpenNavbar);
   function _handleNavbar() {
     setIsOpenNavbar(!isOpenNavbar);
   }
+
   return (
-    <div className="header_Container">
-      <div className="header_Content">
-        <div className="header_Logo">
-          <img src="https://user-images.githubusercontent.com/59892368/211217236-86d5d9d0-8991-4a65-a29c-60bd65621ced.svg" />
-        </div>
-        <div className={isOpenNavbar ? "navBar active" : "navBar"}>
-          <a className="close_Button" onClick={_handleNavbar}>
-            {isOpenNavbar ? <GrClose size={50} /> : ""}
+    <nav className=" flex w-full  h-16 fixed top-0 left-0 bg-[#3d3d4dab] z-40 justify-center">
+      <div className="flex  w-full max-w-[1200px]  items-center justify-between m-6">
+        <div className=" flex items-center gap-2">
+          <a href="/">
+            <img className="h-14 w-14 " src={logoLib} alt="logoLib" />
           </a>
-          <div className="nav_Options ">
-            <Link className={path === "/" ? "nav_Option_Active" : ""} to="/">
-              Home
-            </Link>
-            <Link
-              className={path !== "/" ? "nav_Option_Active" : ""}
-              to="/documentation/gettingStarted"
-            >
-              Documentation
-            </Link>
-          </div>
-          <div className="nav_Networks">
-            <div className="github">
-              <a
-                href="https://github.com/DIGOARTHUR/github-automated-repos"
-                target="_blank"
-              >
-                Github
-                <FiExternalLink className="icon_Networks" />
-              </a>
-            </div>
-            <div className="npm">
-              <a
-                href="https://www.npmjs.com/package/github-automated-repos"
-                target="_blank"
-              >
-                NPM
-                <FiExternalLink className="icon_Networks" />
-              </a>
-            </div>
-          </div>
         </div>
-        <div className="navBar_Icon_Mobile">
-          <a onClick={_handleNavbar}>
-            {isOpenNavbar ? "" : <GoThreeBars size={50} />}
+
+        <div className="flex gap-3">
+          <a className="max-sm:hidden" href="https://www.npmjs.com/package/github-automated-repos">
+            <FaNpm size={40} className="hover:fill-[#cc3c34]" />
+          </a>
+          <a className="max-sm:hidden" href="https://github.com/DIGOARTHUR/github-automated-repos/">
+            <IoLogoGithub size={35} className="hover:fill-[#000000] " />
+          </a>
+          <a className="md:hidden " onClick={_handleNavbar}>
+            {isOpenNavbar ? "" : <FaBars size={45} />}
           </a>
         </div>
       </div>
-    </div>
+
+      {viewportWidth < 1024 ? (
+        <Sidebar isOpen={isOpenNavbar} setIsOpen={_handleNavbar} />
+      ) : (
+        ""
+      )}
+    </nav>
   );
 }
