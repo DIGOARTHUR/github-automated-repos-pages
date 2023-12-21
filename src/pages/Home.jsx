@@ -45,13 +45,13 @@ export default function Home() {
               to="/stackicons"
               className="h-[70px] w-[30%] border-2 rounded-full flex items-center justify-center max-sm:w-full hover:bg-[#636371]"
             >
-              Icon Stacks
+              Stack Icons
             </Link>
             <Link
               to="/projecticons"
               className="h-[70px] w-[30%] border-2 rounded-full  flex items-center justify-center max-sm:w-full hover:bg-[#636371]"
             >
-              Icon Projects
+              Project Icons
             </Link>
           </div>
         </div>

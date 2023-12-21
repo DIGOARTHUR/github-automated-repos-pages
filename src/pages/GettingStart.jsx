@@ -328,7 +328,7 @@ const dataReposGithubCode = `
 
 const codeExampleJSX = `   
   import './App.css';
-  import { useGitHubAutomatedRepos, ProjectIcons, StackIcons, StackLabels, } from 'github-automated-repos';
+  import { useGitHubAutomatedRepos, ProjectIcons, StackIcons, StackLabels } from 'github-automated-repos';
   function App() {
                     {/*useGitHubAutomatedRepos hook*/ }
     const data = useGitHubAutomatedRepos("GitHubUsername", "KeyWord");
