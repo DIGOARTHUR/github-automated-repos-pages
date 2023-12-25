@@ -1,12 +1,12 @@
 
 import './App.css'
 
-import React from 'react'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
 import StackIcons from './pages/StackIcons.jsx'
 import GettingStart from './pages/GettingStart'
 import ProjectIcons from './pages/ProjectIcons'
+import Releases from './pages/Releases.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route >
@@ -14,6 +14,7 @@ const router = createBrowserRouter(
       <Route path='/stackicons' element={<StackIcons />} />
       <Route path='/gettingstart' element={<GettingStart/>} />
       <Route path='/projecticons' element={<ProjectIcons/>} />
+      <Route path='/releases' element={<Releases/>} />
     </Route>
   )
 )
@@ -30,14 +31,5 @@ function App() {
   )
 }
 
-
-
-const Root = () => {
-  return (
-    <>
-
-    </>
-  )
-}
 
 export default App
