@@ -1,9 +1,7 @@
 import { getItemLocalStorage } from "../localstorage";
+import { useEffect, useState } from "react";
 
-
-
-
-const data = [
+const dataas = [
   {
     url: "https://api.github.com/repos/DIGOARTHUR/github-automated-repos/releases/133996992",
     assets_url:
@@ -198,10 +196,18 @@ const data = [
   },
 ];
 
+export function getAllReleasesAPI() {
 
 
-function getReleasesInTheLast30Days() {
-    
+   return  fetch(
+        "https://api.github.com/repos/digoarthur/github-automated-repos/releases"
+      )
+        .then((response) => response.json())
+        .then((dataAPI) => dataAPI);
+}
+
+function getReleasesInTheLast30Days(data) {
+   
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
 
@@ -217,24 +223,21 @@ function getReleasesInTheLast30Days() {
       return item;
     }
   });
-
- 
-  console.log(data2)
-
-  return data2 ;
+console.log(data2)
+  return data2.map((item) => ({
+    id: item.id,
+    created_at: item.created_at,
+  }));
 }
 
 function isNotReleasesInTheLast30DaysInLocalstorage(item) {
- 
-    const data5 = localStorage.getItem('name');
-    if(data5){
-        return data5.includes(item)
-    }
- 
-   
+  const data5 = localStorage.getItem("name");
+  if (data5) {
+    return data5.includes(item);
   }
+}
 
-function getAllReleases() {
+function getAllReleases(data) {
   const data2 = data.map((item) => {
     return item;
   });
@@ -242,4 +245,8 @@ function getAllReleases() {
   return data2;
 }
 
-export { getReleasesInTheLast30Days, getAllReleases, isNotReleasesInTheLast30DaysInLocalstorage };
+export {
+  getReleasesInTheLast30Days,
+  getAllReleases,
+  isNotReleasesInTheLast30DaysInLocalstorage,
+};

@@ -7,6 +7,7 @@ import StackIcons from './pages/StackIcons.jsx'
 import GettingStart from './pages/GettingStart'
 import ProjectIcons from './pages/ProjectIcons'
 import Releases from './pages/Releases.jsx'
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route >

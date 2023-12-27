@@ -1,44 +1,50 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
+import { ReleaseNotificationContext } from '../context/ReleaseNotificationContext';
 import {
   getReleasesInTheLast30Days,
-  getAllReleases,
-  isNotReleasesInTheLast30DaysInLocalstorage
+  isNotReleasesInTheLast30DaysInLocalstorage,
+  getAllReleasesAPI,
 } from "../utils/api/releases";
 
-import {getItemLocalStorage , setItemLocalStorage } from "../utils/localstorage";
+import {
+  getItemLocalStorage,
+  setItemLocalStorage,
+} from "../utils/localstorage";
 
 export default function Releases() {
-  const [count, setCount] = useState();
-  const [allData, setAllData] = useState([]);
-  const [releasesInTheLast30DayslData, setReleasesInTheLast30DayslData] = useState([]);
-console.log(getItemLocalStorage ())
-  useEffect(() => {
-    var data3 = getReleasesInTheLast30Days();
-    setCount(data3.length);
-    setReleasesInTheLast30DayslData(data3)
-    var data2 = getAllReleases();
-    setAllData(data2);
-  }, []);
+  const { countReleasesInTheLast30Days,setCountReleasesInTheLast30Days} = useContext(ReleaseNotificationContext);
 
+  const [allData, setAllData] = useState([]);
+  const [releasesInTheLast30DayslData, setReleasesInTheLast30DayslData] =useState([]);
+  const [releasesDataAPI, setReleasesDataAPI] = useState([]);
+
+  useEffect(() => {
+    getAllReleasesAPI().then((data) =>{setAllData(data), setReleasesInTheLast30DayslData(getReleasesInTheLast30Days(data))} );
+    
+  }, []);
+  setCountReleasesInTheLast30Days(releasesInTheLast30DayslData.length)
+ 
+  
   function MarkAllasRead(releasesInTheLast30DayslData) {
-    setItemLocalStorage(releasesInTheLast30DayslData)
-     var data3 = getReleasesInTheLast30Days();
-    setCount(data3.length);
-   
+    setItemLocalStorage(releasesInTheLast30DayslData);
+    setCountReleasesInTheLast30Days(0)
+    setReleasesInTheLast30DayslData([])
   }
-  isNotReleasesInTheLast30DaysInLocalstorage()
+  isNotReleasesInTheLast30DaysInLocalstorage();
   return (
     <main className="flex  min-h-screen flex-col items-center m-auto ">
       <Header />
       <div className="w-full max-w-[1280px]  mt-40 px-6 ">
         <div className="flex items-center  justify-between">
           <h1 className="text-4xl  mb-2 max-md:text-4xl">Releases</h1>
-          <button onClick={() => MarkAllasRead(releasesInTheLast30DayslData)}>Mark All as Read</button>
+          <button onClick={() => MarkAllasRead(releasesInTheLast30DayslData)}>
+            Mark All as Read
+          </button>
         </div>
 
         {allData.map((item, index) => {
-          return index <= count - 1 ? (
+          return index <= releasesInTheLast30DayslData.length - 1 ? (
             <div
               key={index}
               className="p-5 border-t-[1px] border-b-[1px] bg-[#636371] hover:bg-[#636371]"
