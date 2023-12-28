@@ -41,7 +41,8 @@ const dataas = [
     name: "Versão final v1.0.0",
     draft: false,
     prerelease: false,
-    created_at: "2023-12-24T19:11:08Z",
+    created_at
+: "2023-12-24T19:11:08Z",
     published_at: "2023-12-14T19:19:48Z",
     assets: [],
     tarball_url:
@@ -89,7 +90,8 @@ const dataas = [
     name: "v1.1.1",
     draft: false,
     prerelease: false,
-    created_at: "2023-12-11T19:24:36Z",
+    created_at
+: "2023-12-11T19:24:36Z",
     published_at: "2023-12-15T20:36:26Z",
     assets: [],
     tarball_url:
@@ -137,7 +139,8 @@ const dataas = [
     name: "Versão final v1.0.0",
     draft: false,
     prerelease: false,
-    created_at: "2023-12-23T19:11:08Z",
+    created_at
+: "2023-12-23T19:11:08Z",
     published_at: "2023-12-14T19:19:48Z",
     assets: [],
     tarball_url:
@@ -185,7 +188,8 @@ const dataas = [
     name: "Versão final v1.0.0",
     draft: false,
     prerelease: false,
-    created_at: "2023-10-23T19:11:08Z",
+    created_at
+: "2023-10-23T19:11:08Z",
     published_at: "2023-10-23T19:19:48Z",
     assets: [],
     tarball_url:
@@ -212,7 +216,7 @@ function getReleasesInTheLast30Days(data) {
   const today = new Date(timeElapsed);
 
   const data2 = data.filter((item) => {
-    var oldData = item.created_at.slice(0, 10);
+    var oldData = item.published_at.slice(0, 10);
 
     var difference = Math.abs(
       new Date(oldData) - new Date(today.toISOString().slice(0, 10))
@@ -226,7 +230,7 @@ function getReleasesInTheLast30Days(data) {
 console.log(data2)
   return data2.map((item) => ({
     id: item.id,
-    created_at: item.created_at,
+    published_at: item.published_at,
   }));
 }
 
